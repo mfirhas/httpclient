@@ -1,6 +1,7 @@
 package httpclient
 
 import (
+	"bufio"
 	"bytes"
 	"context"
 	"encoding/json"
@@ -96,6 +97,11 @@ type Opts struct {
 
 func newClient(opts *Opts) *Client {
 	logger := log.New(os.Stderr, "", 0)
+	if opts.EnableLogger {
+		w := make(buffer, 10<<20)
+		go write(w)
+		logger = log.New(w, "", 0)
+	}
 	c := &Client{&http.Client{}}
 	if opts.Transport != nil {
 		c.Client.Transport = opts.Transport
@@ -254,6 +260,25 @@ func (r *retry) RoundTrip(req *http.Request) (resp *http.Response, err error) {
 		}
 	}
 	return
+}
+
+// buffer memory to store log before writing them into writer/file
+type buffer chan []byte
+
+// Write overwrite io.Writer Write method to instead of writing directly into file,
+// it passes the bytes into buffer memory to be written into actual writer/file asynchronously.
+func (b buffer) Write(p []byte) (int, error) {
+	b <- append(([]byte)(nil), p...)
+	return len(p), nil
+}
+
+// worker to write log data from buffer memory into writer/file asynchronously.
+func write(b buffer) {
+	writer := bufio.NewWriter(os.Stderr)
+	for p := range b {
+		writer.Write(p)
+		writer.Flush()
+	}
 }
 
 func (l *logRT) RoundTrip(req *http.Request) (resp *http.Response, err error) {
