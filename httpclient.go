@@ -289,11 +289,10 @@ func (l *logRT) RoundTrip(req *http.Request) (resp *http.Response, err error) {
 		l.logger.Printf("%s | httpclient | %s | ERR | %s | %v | %v | %s\n", time.Now().Format(time.RFC3339), req.Method, fmt.Sprintf("%s%s", req.URL.Host, req.URL.Path), err, elapsed, req.Header.Get("Request-Id"))
 		return
 	}
-	if resp != nil && resp.StatusCode >= 400 {
+	if resp != nil {
 		l.logger.Printf("%s | httpclient | %s | %s | %s | %v | %s\n", time.Now().Format(time.RFC3339), req.Method, strconv.Itoa(resp.StatusCode), fmt.Sprintf("%s%s", req.URL.Host, req.URL.Path), elapsed, req.Header.Get("Request-Id"))
 		return
 	}
-	fmt.Printf("%s | httpclient | %s | %s | %s | %v | %s\n", time.Now().Format(time.RFC3339), req.Method, strconv.Itoa(resp.StatusCode), fmt.Sprintf("%s%s", req.URL.Host, req.URL.Path), elapsed, req.Header.Get("Request-Id"))
 	return
 }
 
