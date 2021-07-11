@@ -579,7 +579,7 @@ func Get(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.Get(ctx, req)
@@ -589,7 +589,7 @@ func Head(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.Head(ctx, req)
@@ -599,7 +599,7 @@ func Options(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.Options(ctx, req)
@@ -609,7 +609,7 @@ func PostJSON(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.PostJSON(ctx, req)
@@ -619,7 +619,7 @@ func PostForm(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.PostForm(ctx, req)
@@ -629,7 +629,7 @@ func PostMultipart(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.PostMultipart(ctx, req)
@@ -639,7 +639,7 @@ func PutJSON(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.PutJSON(ctx, req)
@@ -649,7 +649,7 @@ func PutForm(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.PutForm(ctx, req)
@@ -659,7 +659,7 @@ func PutMultipart(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.PutMultipart(ctx, req)
@@ -669,7 +669,7 @@ func PatchJSON(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.PatchJSON(ctx, req)
@@ -679,7 +679,7 @@ func PatchForm(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.PatchForm(ctx, req)
@@ -689,7 +689,7 @@ func PatchMultipart(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.PatchMultipart(ctx, req)
@@ -699,7 +699,7 @@ func Delete(ctx context.Context, req *Request) *Response {
 	once.Do(func() {
 		client = newClient(&Opts{
 			MaxIdleConns:    100,
-			IdleConnTimeout: 30,
+			IdleConnTimeout: 30 * time.Second,
 		})
 	})
 	return client.Delete(ctx, req)
