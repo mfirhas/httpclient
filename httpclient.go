@@ -299,9 +299,9 @@ func (l *logRT) RoundTrip(req *http.Request) (resp *http.Response, err error) {
 type Request struct {
 	BaseURL   string
 	Header    http.Header
-	URLValues url.Values        // for get method
-	Body      map[string]string // for x-www-form-urlencoded, json payload, and multipart/form non-binary data
-	Files     []File            // for multipart/form binary data
+	URLValues url.Values             // for get method
+	Body      map[string]interface{} // for x-www-form-urlencoded, json payload, and multipart/form non-binary data
+	Files     []File                 // for multipart/form binary data
 
 	RequestID string // unique identifier for each request. E.g. uuid v4. If empty, then will be set automatically using uuid v4.
 }
@@ -359,7 +359,11 @@ func (r *Request) FormURLEncoded() (io.Reader, error) {
 	}
 	body := url.Values{}
 	for key, val := range r.Body {
-		body.Add(key, val)
+		if v, ok := val.(string); ok {
+			body.Add(key, v)
+		} else {
+			body.Add(key, "") // x-www-form-urlencoded use string as values type
+		}
 	}
 	r.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	return strings.NewReader(body.Encode()), nil

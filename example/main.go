@@ -15,9 +15,9 @@ func main() {
 	// getWithURIParams()
 	// getWithPathParams()
 	// getWithURIParamsAndPathParams()
-	// Post()
+	Post()
 	// PostJSON()
-	PostMultiPart()
+	// PostMultiPart()
 }
 
 // get simple get request
@@ -116,7 +116,7 @@ func getWithURIParamsAndPathParams() {
 // Post post request using x-www-form payload
 func Post() {
 	baseURL := "http://localhost:8080/post"
-	body := map[string]string{
+	body := map[string]interface{}{
 		"param1": "value1",
 		"param2": "value2",
 		"param3": "value3",
@@ -141,7 +141,7 @@ func Post() {
 // PostJSON port request using json payload
 func PostJSON() {
 	baseURL := "http://localhost:8080/postjson"
-	body := map[string]string{
+	body := map[string]interface{}{
 		"param1": "value1",
 		"param2": "value2",
 		"param3": "value3",
@@ -168,7 +168,7 @@ func PostJSON() {
 // uploaded data should be put into ./example/to/ directory named file1.pdf and file2.jpg.
 func PostMultiPart() {
 	baseURL := "http://localhost:8080/postmulti"
-	body := map[string]string{
+	body := map[string]interface{}{
 		"param1": "value1",
 		"param2": "value2",
 	}
